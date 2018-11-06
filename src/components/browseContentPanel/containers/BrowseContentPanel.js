@@ -15,6 +15,7 @@ export default class BrowseContentPanel extends Component {
     for(let key in this.state.datas) {
       console.log(key);
       const content = <ContentView 
+        key= {this.state.datas[key].id}
         id= {this.state.datas[key].id}
         src = {this.state.datas[key].src}
         type = {this.state.datas[key].type}
@@ -29,5 +30,4 @@ export default class BrowseContentPanel extends Component {
       </div>
     )
   }
-  
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Visual from '../../presentation/components/Visual.js';
-import Properties from '../../presentation/components/AllProperties.js';
+import Visual from '../components/Visual.js';
+import Properties from '../components/AllProperties.js';
 
 
 export default class Content extends Component {
@@ -24,7 +24,7 @@ export default class Content extends Component {
             break;
             default:
                 render_visual=(
-                    <img 
+                    <img width="100%" height="90%"
                         className='imgCard' 
                         src={this.props.src}  
                     />
@@ -33,11 +33,11 @@ export default class Content extends Component {
         }
         return(
             this.props.onlyContent ? 
-                <Visual src={this.props.src}
+                <Visual className="panel panel-default"
                     render_visual={render_visual}
                 />
-                : <Properties 
-                    src={this.props.src}
+                : <Properties
+                    className="panel panel-default"
                     title={this.props.title}
                     id={this.props.id}
                     type={this.props.type}
