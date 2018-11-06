@@ -33,16 +33,19 @@ export default class Content extends Component {
         }
         return(
             this.props.onlyContent ? 
-                <Visual className="panel panel-default"
-                    render_visual={render_visual}
-                />
-                : <Properties
-                    className="panel panel-default"
-                    title={this.props.title}
-                    id={this.props.id}
-                    type={this.props.type}
-                    render_visual={render_visual}
-                />
+                <div className="panel panel-default">
+                    <Visual
+                        render_visual={render_visual}
+                    />
+                </div>
+                : <div className="panel panel-default">
+                    <Properties
+                        title={this.props.title}
+                        id={this.props.id}
+                        type={this.props.type}
+                        render_visual={render_visual}
+                    />
+                </div>
         );
     }
 

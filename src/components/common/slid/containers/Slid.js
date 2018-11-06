@@ -46,7 +46,7 @@ export default class Slid extends Component {
         </div>
         <div className="panel-body">
           <div>{this.state.txt}</div>
-          <div>{content}</div>
+          {content}
           <EditMetaSlid 
           title = {this.state.title}
           txt = {this.state.txt}
@@ -62,15 +62,12 @@ export default class Slid extends Component {
           </div>
           <div className="panel-body">
             <div>{this.state.txt}</div>
-            <div>{content}</div>
           </div>
+          {content}
         </div>
       break;
-      default:
-        slid = <div></div>;
-      break;
+      default: break;
     }
-    console.log(slid)
     return(
       <div>
         {slid}

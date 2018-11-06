@@ -13,7 +13,6 @@ export default class BrowseContentPanel extends Component {
 
   render() {
     for(let key in this.state.datas) {
-      console.log(key);
       const content = <ContentView 
         key= {this.state.datas[key].id}
         id= {this.state.datas[key].id}
