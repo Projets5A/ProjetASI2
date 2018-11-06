@@ -5,28 +5,44 @@ import Properties from '../../presentation/components/AllProperties.js';
 
 export default class Content extends Component {
 
-    constructor( props){
-        super(props);
-        this.state = {
-            id : this.props.id,
-            src : this.props.src,
-            type : this.props.type,
-            title : this.props.title,
-            onlyContent : this.props.onlyContent,    
-        };
-    }
-    
-
     render(){
+        let render_visual;
+        switch(this.props.type){
+            case "video":
+                render_visual=(
+                    <object  width="100%" height="90%"
+                        data={this.props.src}>
+                    </object>
+                );
+            break;
+            case "web":
+                render_visual=(
+                    <iframe  width="100%" height="90%"
+                        src={this.props.src}>
+                    </iframe>
+                );
+            break;
+            default:
+                render_visual=(
+                    <img 
+                        className='imgCard' 
+                        src={this.props.src}  
+                    />
+                );
+            break;
+        }
         return(
-            this.state.onlyContent ? 
-                <Visual src={this.state.src}/>
-                : <Properties 
-                    src={this.state.src}
-                    title={this.state.title}
-                    id={this.state.id}
+            this.props.onlyContent ? 
+                <Visual src={this.props.src}
+                    render_visual={render_visual}
                 />
-
+                : <Properties 
+                    src={this.props.src}
+                    title={this.props.title}
+                    id={this.props.id}
+                    type={this.props.type}
+                    render_visual={render_visual}
+                />
         );
     }
 

@@ -6,10 +6,9 @@ export default class Visual extends Component {
 
     render() {
         return (
-            <div className='panel panel-default'>
-                <img src={this.props.src} ></img>
+            <div style={{height: 150, width:"100%"}} className='panel panel-default'>
+                {this.props.render_visual}
             </div>
         )
-
     }
 }
