@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import EditMetaSlid from "../components/EditMetaSlid";
 import Content from "../../content/containers/Content";
+import { setSelectedSlid } from "../../../../actions";
+import { connect } from "react-redux";
 
-export default class Slid extends Component {
+class Slid extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,15 +17,25 @@ export default class Slid extends Component {
     }
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeTxt = this.handleChangeTxt.bind(this);
-
+    this.updateSelectedSlid = this.updateSelectedSlid.bind(this);
   }
 
   handleChangeTitle(e) {
-    this.setState({title: e.target.value});
+    this.setState({ title: e.target.value });
   }
 
   handleChangeTxt(e) {
-    this.setState({txt: e.target.value});
+    this.setState({ txt: e.target.value });
+  }
+
+  updateSelectedSlid() {
+    const tmpSlid = {
+      id: this.props.id,
+      title: this.props.title, 
+      txt: this.props.txt, 
+      content_id: this.props.content_id
+    }
+    this.props.dispatch(setSelectedSlid(tmpSlid))
   }
 
   render() {
@@ -41,20 +53,20 @@ export default class Slid extends Component {
     switch (this.props.displayMode) {
       case "FULL_MNG":
         slid = <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title">{this.state.title}</h3>
+          <div className="panel-heading">
+            <h3 className="panel-title">{this.state.title}</h3>
+          </div>
+          <div className="panel-body">
+            <div>{this.state.txt}</div>
+            {content}
+            <EditMetaSlid
+              title={this.state.title}
+              txt={this.state.txt}
+              handleChangeTxt={this.handleChangeTxt}
+              handleChangeTitle={this.handleChangeTitle} />
+          </div>
         </div>
-        <div className="panel-body">
-          <div>{this.state.txt}</div>
-          {content}
-          <EditMetaSlid 
-          title = {this.state.title}
-          txt = {this.state.txt}
-          handleChangeTxt = {this.handleChangeTxt}
-          handleChangeTitle = {this.handleChangeTitle}/>
-        </div>
-      </div>
-      break;
+        break;
       case "SHORT":
         slid = <div className="panel panel-default">
           <div className="panel-heading">
@@ -65,13 +77,15 @@ export default class Slid extends Component {
           </div>
           {content}
         </div>
-      break;
+        break;
       default: break;
     }
-    return(
-      <div>
+    return (
+      <div onClick={this.updateSelectedSlid}>
         {slid}
       </div>
     )
   }
 }
+
+export default connect()(Slid)
