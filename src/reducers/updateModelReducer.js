@@ -1,14 +1,14 @@
-const Tools = require("../services/Tools.js");
 
 const updateModelReducer = (state = { presentation: {}, content_map: {} }, action) => {
-  console.log(action);
   switch (action.type) {
     case 'UPDATE_PRESENTATION':
-      return; //TO DO
+      const newPres = {presentation: action.obj};
+      return newPres;
     case 'UPDATE_PRESENTATION_SLIDS':
       return; //TO DO
     case 'UPDATE_CONTENT_MAP':
-      return; //TO DO
+      const newMap = {content_map: action.obj};
+      return newMap;
     case 'ADD_CONTENT':
       return; //TO DO
     default:

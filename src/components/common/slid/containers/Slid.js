@@ -12,7 +12,7 @@ class Slid extends Component {
       title: this.props.title,
       txt: this.props.txt,
       content_id: this.props.content_id,
-      contentMap: this.props.contentMap,
+      contentMap: this.props.content_map,
       displayMode: this.props.displayMode
     }
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -34,8 +34,8 @@ class Slid extends Component {
       title: this.props.title, 
       txt: this.props.txt, 
       content_id: this.props.content_id
-    }
-    this.props.dispatch(setSelectedSlid(tmpSlid))
+    };
+    this.props.dispatch(setSelectedSlid(tmpSlid));
   }
 
   render() {
@@ -88,4 +88,12 @@ class Slid extends Component {
   }
 }
 
-export default connect()(Slid)
+const mapStateToProps = (state, ownProps) => {
+  if(state.changeModel_reducer.content_map) {
+    return {
+      contentMap: state.changeModel_reducer.content_map
+    }
+  }
+}
+
+export default connect(mapStateToProps)(Slid);

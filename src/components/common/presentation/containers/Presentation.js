@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Slide from "../../slid/containers/Slid";
 import EditMetaSlid from "../../slid/components/EditMetaSlid";
+import { connect } from "react-redux";
 
-export default class Presentation extends Component {
+class Presentation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,16 +27,18 @@ export default class Presentation extends Component {
 
   render() {
     let slides = [];
-    for(let i= 0; i<this.state.slidArray.length; i++) {
-      slides.push(<Slide 
-        key={this.state.slidArray[i].id}
-        id= {this.state.slidArray[i].id}
-        title= {this.state.slidArray[i].title}
-        txt= {this.state.slidArray[i].txt}
-        content_id= {this.state.slidArray[i].content_id}
-        contentMap={this.state.contentMap} 
-        displayMode= "SHORT"
-      />);
+    if(this.props.presentation) {
+      for(let i= 0; i<this.props.presentation.slidArray.length; i++) {
+        slides.push(<Slide 
+          key={this.props.presentation.slidArray[i].id}
+          id= {this.props.presentation.slidArray[i].id}
+          title= {this.props.presentation.slidArray[i].title}
+          txt= {this.props.presentation.slidArray[i].txt}
+          content_id= {this.props.presentation.slidArray[i].content_id}
+          contentMap={this.props.contentMap} 
+          displayMode= "SHORT"
+        />);
+      }
     }
     return(
       <div className="panel panel-default">
@@ -55,3 +58,26 @@ export default class Presentation extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  console.log(state.changeModel_reducer.content_map, state.changeModel_reducer.presentation, "presentation");
+  console.log("incrementation")
+  if(state.changeModel_reducer.content_map && state.changeModel_reducer.presentation) {
+    return {
+      contentMap: state.changeModel_reducer.content_map,
+      presentation: state.changeModel_reducer.presentation
+    }
+  }
+  if(state.changeModel_reducer.content_map) {
+    return {
+      contentMap: state.changeModel_reducer.content_map,
+    }
+  }
+  if(state.changeModel_reducer.presentation) {
+    return {
+      presentation: state.changeModel_reducer.presentation
+    }
+  }
+}
+
+export default connect(mapStateToProps)(Presentation);

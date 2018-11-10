@@ -5,19 +5,23 @@ import * as contentMapTmp from '../../source/contentMap';
 import BrowseContentPanel from "../browseContentPanel/containers/BrowseContentPanel";
 import contentMap from "../../source/contentMap.json";
 import presJson from "../../source/pres.json";
-import Slid from "../common/slid/containers/Slid";
 import Presentation from "../common/presentation/containers/Presentation";
-import { createStore } from 'redux'
-import todoApp from '../../reducers/selectReducer'
-import { Provider } from 'react-redux'
+import { createStore } from 'redux';
+import globalReducer from '../../reducers/globalReducer';
+import { Provider } from 'react-redux';
+import EditSlidPanel from '../editSlidPanel/containers/editSlidPanel';
+import { updateContentMap, updatePresentation } from '../../actions';
 
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.store = createStore(todoApp)
+    this.store = createStore(globalReducer);
     this.state = {
       contentMap: contentMapTmp,
     }
+    this.store.dispatch(updatePresentation(presJson));
+    this.store.dispatch(updateContentMap(contentMapTmp));
+    
   }
   
 
@@ -27,29 +31,12 @@ export default class Main extends React.Component {
         <div className='container-fluid height-100'>
           <div className="row height-100">
             <div className='col-md-3 col-lg-3 height-100 vertical-scroll'>
-              <Presentation 
-                title={presJson.title}
-                description={presJson.description}
-                id={presJson.id}
-                slidArray={presJson.slidArray}
-                contentMap={this.state.contentMap}/>
+              <Presentation />
             </div>
             <div className='col-md-6 col-lg-6 height-100 vertical-scroll'>
-              <Slid
-                txt="hello this is my first slid"
-                title="hello world!"
-                id={1}
-                content_id={1}
-                contentMap={this.state.contentMap}
-                displayMode="FULL_MNG"
-              />
-              <Slid
-                txt="hello this is my first slid"
-                title="hello world!"
-                id={1}
-                content_id={1}
-                contentMap={this.state.contentMap}
-                displayMode="SHORT"
+              <EditSlidPanel
+                selected_slid={""}
+                contentMap={contentMap}
               />
             </div>
             <div className='col-md-3 col-lg-3 height-100 vertical-scroll'>
