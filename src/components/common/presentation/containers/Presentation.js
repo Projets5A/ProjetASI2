@@ -27,7 +27,7 @@ class Presentation extends Component {
 
   render() {
     let slides = [];
-    if(this.props.presentation) {
+    if(JSON.stringify(this.props.presentation) !== JSON.stringify({})) {
       for(let i= 0; i<this.props.presentation.slidArray.length; i++) {
         slides.push(<Slide 
           key={this.props.presentation.slidArray[i].id}

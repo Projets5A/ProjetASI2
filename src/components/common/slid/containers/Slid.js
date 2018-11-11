@@ -40,7 +40,7 @@ class Slid extends Component {
     this.props.dispatch(setSelectedSlid(tmpSlid));
   }
 
-  updatePresentation() {
+  updatePresentation(e) {
     const tmpSlid = {
       id: this.props.id,
       title: this.state.title, 
@@ -49,11 +49,9 @@ class Slid extends Component {
     };
     this.props.dispatch(updateSlid(tmpSlid));
   }
-  
   componentWillReceiveProps() {
     this.setState({txt: this.props.txt, title: this.props.title, content_id: this.props.content_id});
   }
-
   render() {
     let content = <div></div>;
     for (let key in this.props.contentMap) {
@@ -107,7 +105,6 @@ class Slid extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     contentMap: state.updateModelReducer.content_map,
-    slid: state.updateModelReducer.slid
   }
 }
 

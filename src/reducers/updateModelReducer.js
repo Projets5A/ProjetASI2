@@ -5,7 +5,6 @@ const updateModelReducer = (state = { presentation: {}, content_map: {} }, actio
       const newPres = {presentation: action.obj, content_map: state.content_map};
       return newPres;
     case 'UPDATE_PRESENTATION_SLIDS':
-      console.log(action.obj);
       const newPresentation = JSON.parse(JSON.stringify(state.presentation));
       for(let i=0; i<newPresentation.slidArray.length;i++){
           if(newPresentation.slidArray[i].id === action.obj.id){
