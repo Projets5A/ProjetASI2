@@ -3,6 +3,7 @@ import EditMetaSlid from "../components/EditMetaSlid";
 import Content from "../../content/containers/Content";
 import { setSelectedSlid } from "../../../../actions";
 import { connect } from "react-redux";
+import { updateSlid } from "../../../../actions/index"
 
 class Slid extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Slid extends Component {
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeTxt = this.handleChangeTxt.bind(this);
     this.updateSelectedSlid = this.updateSelectedSlid.bind(this);
+    this.updatePresentation = this.updatePresentation.bind(this);
   }
 
   handleChangeTitle(e) {
@@ -36,6 +38,16 @@ class Slid extends Component {
       content_id: this.props.content_id
     };
     this.props.dispatch(setSelectedSlid(tmpSlid));
+  }
+
+  updatePresentation() {
+    const tmpSlid = {
+      id: this.props.id,
+      title: this.state.title, 
+      txt: this.state.txt, 
+      content_id: this.props.content_id
+    };
+    this.props.dispatch(updateSlid(tmpSlid));
   }
   
   componentWillReceiveProps() {
@@ -85,7 +97,7 @@ class Slid extends Component {
       default: break;
     }
     return (
-      <div onClick={this.updateSelectedSlid}>
+      <div onClick={this.updateSelectedSlid} onChange={this.updatePresentation}>
         {slid}
       </div>
     )
@@ -94,7 +106,8 @@ class Slid extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    contentMap: state.updateModelReducer.content_map
+    contentMap: state.updateModelReducer.content_map,
+    slid: state.updateModelReducer.slid
   }
 }
 

@@ -19,7 +19,7 @@ export const updatePresentation=(presentation)=>{
   };
 }
 
-export const updatePresSlid=(slid_obj)=>{
+export const updateSlid=(slid_obj)=>{
   return{
     type:'UPDATE_PRESENTATION_SLIDS',
     obj:slid_obj,

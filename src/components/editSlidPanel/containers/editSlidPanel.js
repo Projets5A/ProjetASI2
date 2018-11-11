@@ -12,10 +12,9 @@ class EditSlidPanel extends Component {
   }
 
   render() {
-    console.log(this.props, "truc");
     return (
       <div>{
-        <Slid
+        <Slid 
           id={this.props.selected_slid.id}
           title={this.props.selected_slid.title}
           txt={this.props.selected_slid.txt}

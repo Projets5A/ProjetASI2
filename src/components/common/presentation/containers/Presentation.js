@@ -26,7 +26,6 @@ class Presentation extends Component {
   } 
 
   render() {
-    console.log(this.props.presentation);
     let slides = [];
     if(this.props.presentation) {
       for(let i= 0; i<this.props.presentation.slidArray.length; i++) {
