@@ -1,10 +1,8 @@
 import selectedReducer from '../reducers/selectReducer';
 import updateModelReducer from '../reducers/updateModelReducer';
+import { combineReducers } from 'redux';
 
-const globalReducer = (state={slid:{}, presentation: {}, content_map: {}}, action) => {
-    return {
-      selectSlid_reducer: selectedReducer(state.slid,action),
-      changeModel_reducer: updateModelReducer({content_map: state.content_map, presentation: state.presentation}, action)
-    }
-  }
-export default globalReducer;
+export default combineReducers({
+  selectedReducer,
+  updateModelReducer
+})

@@ -17,7 +17,7 @@ export default class EditMetaSlid extends React.Component {
         />
         <label htmlFor="currentSlideText">Text</label>
         <textarea
-          rows="5"
+          rows="4"
           type="text"
           className="form-control"
           id="currentSlideText"

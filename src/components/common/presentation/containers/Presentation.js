@@ -7,10 +7,10 @@ class Presentation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
-      title: this.props.title,
-      description: this.props.description,
-      slidArray: this.props.slidArray,
+      id: this.props.presentation.id,
+      title: this.props.presentation.title,
+      txt: this.props.presentation.description,
+      slidArray: this.props.presentation.slidArray,
       contentMap: this.props.contentMap
     }
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
@@ -18,7 +18,7 @@ class Presentation extends Component {
   }
 
   handleChangeDescription(e) {
-    this.setState({description: e.target.value})
+    this.setState({txt: e.target.value})
   } 
 
   handleChangeTitle(e) {
@@ -26,6 +26,7 @@ class Presentation extends Component {
   } 
 
   render() {
+    console.log(this.props.presentation);
     let slides = [];
     if(this.props.presentation) {
       for(let i= 0; i<this.props.presentation.slidArray.length; i++) {
@@ -44,12 +45,12 @@ class Presentation extends Component {
       <div className="panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title">{this.state.title}</h3>
-          <div>{this.state.description}</div>
+          <div>{this.state.txt}</div>
         </div>
         <div className="panel-body">
           <EditMetaSlid 
             title = {this.state.title}
-            txt = {this.state.description}
+            txt = {this.state.txt}
             handleChangeTxt = {this.handleChangeDescription}
             handleChangeTitle = {this.handleChangeTitle}/>
             {slides}
@@ -60,23 +61,9 @@ class Presentation extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state.changeModel_reducer.content_map, state.changeModel_reducer.presentation, "presentation");
-  console.log("incrementation")
-  if(state.changeModel_reducer.content_map && state.changeModel_reducer.presentation) {
-    return {
-      contentMap: state.changeModel_reducer.content_map,
-      presentation: state.changeModel_reducer.presentation
-    }
-  }
-  if(state.changeModel_reducer.content_map) {
-    return {
-      contentMap: state.changeModel_reducer.content_map,
-    }
-  }
-  if(state.changeModel_reducer.presentation) {
-    return {
-      presentation: state.changeModel_reducer.presentation
-    }
+  return {
+    contentMap: state.updateModelReducer.content_map,
+    presentation: state.updateModelReducer.presentation
   }
 }
 

@@ -37,6 +37,10 @@ class Slid extends Component {
     };
     this.props.dispatch(setSelectedSlid(tmpSlid));
   }
+  
+  componentWillReceiveProps() {
+    this.setState({txt: this.props.txt, title: this.props.title, content_id: this.props.content_id});
+  }
 
   render() {
     let content = <div></div>;
@@ -89,10 +93,8 @@ class Slid extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  if(state.changeModel_reducer.content_map) {
-    return {
-      contentMap: state.changeModel_reducer.content_map
-    }
+  return {
+    contentMap: state.updateModelReducer.content_map
   }
 }
 

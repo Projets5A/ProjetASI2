@@ -12,30 +12,32 @@ import { Provider } from 'react-redux';
 import EditSlidPanel from '../editSlidPanel/containers/editSlidPanel';
 import { updateContentMap, updatePresentation } from '../../actions';
 
+const store = createStore(globalReducer);
+
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.store = createStore(globalReducer);
     this.state = {
       contentMap: contentMapTmp,
     }
-    this.store.dispatch(updatePresentation(presJson));
-    this.store.dispatch(updateContentMap(contentMapTmp));
-    
+    store.dispatch(updateContentMap(contentMapTmp));
+    store.dispatch(updatePresentation(presJson));
   }
-  
 
   render() {
     return (
-      <Provider store={this.store}>
+      <Provider store={store}>
         <div className='container-fluid height-100'>
           <div className="row height-100">
             <div className='col-md-3 col-lg-3 height-100 vertical-scroll'>
-              <Presentation />
+              <Presentation 
+                contentMap={undefined}
+                presentation={undefined}
+              />
             </div>
             <div className='col-md-6 col-lg-6 height-100 vertical-scroll'>
               <EditSlidPanel
-                selected_slid={""}
+                selected_slid={{}}
                 contentMap={contentMap}
               />
             </div>
